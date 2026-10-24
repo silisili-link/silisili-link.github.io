@@ -1,360 +1,292 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="cleartype" content="on">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>嘶哩嘶哩-永久网址发布页</title>
-    <link rel="stylesheet" href="style.css?9">
-    <script src="index.js?8" defer></script>
-    <link rel="shortcut icon" href="#">
-    <style>
+<style>
+    .container {
+        width: 60%;
+        margin: 2% auto 0;
+        background-color: #f0f0f0;
+        padding: 2% 5%;
+        box-shadow: 0 5px 15px rgb(20 20 20 / 80%);
+        border-radius: 10px;
+        box-sizing: border-box;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    ul li {
+        line-height: 2.3;
+    }
+
+    a {
+        color: #00AEEC;
+    }
+
+    /* ========== App 下载区域修复 ========== */
+
+    .app-download-domain {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .domain-status {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        background: #ffffff;
+        padding: 14px 16px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        border: 1px solid #e8e8e8;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .domain-status:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
+    }
+
+    .domain-status.new-app {
+        border: 2px solid #ffc8da;
+        background: linear-gradient(135deg, #fffbfc, #fff0f5);
+    }
+
+    .app-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .app-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        object-fit: cover;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        background-color: #f0f0f0;
+        flex-shrink: 0;
+    }
+
+    .app-name {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+
+    .tag {
+        font-size: 12px;
+        padding: 3px 9px;
+        border-radius: 6px;
+        font-weight: normal;
+        white-space: nowrap;
+    }
+
+    .tag.recommend {
+        background: #ffe3f1;
+        color: #d63384;
+    }
+
+    .tag.interop {
+        background: #e3f2fd;
+        color: #1976d2;
+    }
+
+    .status-and-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 0 0 auto;
+        min-width: 0;
+    }
+
+    .app-status {
+        font-size: 14px;
+        color: #888;
+        white-space: nowrap;
+    }
+
+    .app-link {
+        display: inline-block;
+        padding: 9px 22px;
+        background: #00AEEC;
+        color: #ffffff !important;
+        text-decoration: none;
+        border-radius: 24px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background 0.2s;
+        white-space: nowrap;
+        border: none;
+        line-height: 1.2;
+        flex-shrink: 0;
+    }
+
+    .app-link:hover {
+        background: #0096c7;
+    }
+
+    .new-app .app-link {
+        background: #ff69b4;
+    }
+
+    .new-app .app-link:hover {
+        background: #e05a9d;
+    }
+
+    .app-link.secondary {
+        background: #707070;
+    }
+
+    .app-link.secondary:hover {
+        background: #555555;
+    }
+
+    .app-tip {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.6;
+        padding: 12px 16px;
+        background: #fff9e6;
+        border-radius: 8px;
+        border-left: 4px solid #ffc107;
+        margin: -4px 0 4px;
+    }
+
+    /* ========== 域名区域修复 ========== */
+
+    .domain-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        background: #ffffff;
+        padding: 14px 16px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        border: 1px solid #e8e8e8;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .domain-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .domain-name {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .domain-delay {
+        font-size: 13px;
+        color: #888;
+        white-space: nowrap;
+    }
+
+    .domain-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 0 0 auto;
+        min-width: 0;
+    }
+
+    .domain-status-tag {
+        font-size: 13px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        white-space: nowrap;
+    }
+
+    .domain-status-tag.ok {
+        background: #e8f7ee;
+        color: #2e7d32;
+    }
+
+    .domain-status-tag.warn {
+        background: #fff4e5;
+        color: #c77600;
+    }
+
+    .domain-status-tag.error {
+        background: #fdecea;
+        color: #c0392b;
+    }
+
+    .domain-copy,
+    .domain-go {
+        display: inline-block;
+        padding: 8px 18px;
+        background: #00AEEC;
+        color: #ffffff !important;
+        text-decoration: none;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+        border: none;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .domain-copy:hover,
+    .domain-go:hover {
+        background: #0096c7;
+    }
+
+    /* ========== 移动端修复 ========== */
+
+    @media (max-width: 640px) {
         .container {
-            width: 60%;
-            margin: 2% auto 0;
-            background-color: #f0f0f0;
-            padding: 2% 5%;
-            box-shadow:0 5px 15px rgb(20 20 20 / 80%);
-            border-radius: 10px
+            width: 92%;
+            padding: 4%;
         }
 
-        ul {
-            padding-left: 20px;
-        }
-
-        ul li {
-            line-height: 2.3
-        }
-
-        a {
-            color: #00AEEC
-        }
-
-        /* ================= 【修复版】App下载区域样式 ================= */
-        .app-download-domain {
-            display: flex;
+        .domain-status,
+        .domain-item {
             flex-direction: column;
+            align-items: flex-start;
             gap: 12px;
-            margin-bottom: 24px;
+            padding: 14px;
         }
-        
-        .domain-status {
-            display: flex;
-            align-items: center;
+
+        .app-info,
+        .domain-left {
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .status-and-link,
+        .domain-right {
+            width: 100%;
             justify-content: space-between;
-            background: #ffffff;
-            padding: 14px 18px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #e8e8e8;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-        }
-        
-        .domain-status:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transform: translateY(-1px);
         }
 
-        /* 新版高亮行，粉色边框渐变背景，和截图一致 */
-        .domain-status.new-app {
-            border: 2px solid #ffc8da;
-            background: linear-gradient(135deg, #fffbfc, #fff0f5);
+        .app-name,
+        .domain-name {
+            font-size: 15px;
         }
 
-        /* 左侧区域：图标 + 名字 + 标签 */
-        .app-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            min-width: 0; /* 关键：防止文字撑爆容器挤压右侧 */
+        .app-status,
+        .domain-delay {
+            font-size: 13px;
         }
-
-        .app-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            object-fit: cover;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            background-color: #f0f0f0;
-            flex-shrink: 0;
-        }
-
-        .app-name {
-            font-weight: bold;
-            font-size: 16px;
-            color: #333;
-            line-height: 1.2;
-            white-space: nowrap;
-        }
-
-        .tag {
-            font-size: 12px;
-            padding: 3px 9px;
-            border-radius: 6px;
-            font-weight: normal;
-            white-space: nowrap;
-        }
-        
-        .tag.recommend {
-            background: #ffe3f1;
-            color: #d63384;
-        }
-        
-        .tag.interop {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-
-        /* 右侧区域：版本号 + 按钮，固定顺序，互不挤压 */
-        .status-and-link {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-shrink: 0;
-        }
-
-        .app-status {
-            font-size: 14px;
-            color: #888;
-            white-space: nowrap;
-        }
-
-        .app-link {
-            display: inline-block;
-            padding: 9px 22px;
-            background: #00AEEC;
-            color: #ffffff !important;
-            text-decoration: none;
-            border-radius: 24px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: background 0.2s;
-            white-space: nowrap;
-            border: none;
-            line-height: 1.2;
-        }
-
-        .app-link:hover {
-            background: #0096c7;
-        }
-
-        .new-app .app-link {
-            background: #ff69b4;
-        }
-
-        .new-app .app-link:hover {
-            background: #e05a9d;
-        }
-
-        .app-link.secondary {
-            background: #707070;
-        }
-        .app-link.secondary:hover {
-            background: #555555;
-        }
-
-        /* 说明提示框，紧贴新版下面 */
-        .app-tip {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.6;
-            padding: 12px 16px;
-            background: #fff9e6;
-            border-radius: 8px;
-            border-left: 4px solid #ffc107;
-            margin: -4px 0 4px;
-        }
-
-        /* ========== 移动端修复，重点解决挤在一起、遮挡 ========== */
-        @media (max-width: 640px) {
-            .domain-status {
-                flex-direction: column;
-                align-items: flex-start;
-                gap:12px;
-                padding:14px;
-            }
-            .app-info {
-                width: 100%;
-                flex-wrap: wrap;
-            }
-            .status-and-link {
-                width:100%;
-                justify-content: space-between;
-            }
-        }
-        /* ========================================================= */
-    </style>
-</head>
-<body>
-    <div class="main">
-        <div class="logo">
-            <img src="https://tncache1-f1.v3mh.com/image/2024/07/20/1cf2e889e9604466769a3f2544180b47.png" alt="Logo">
-        </div>
-        <div class="box">
-            <div class="content">
-                <p>这里是嘶哩嘶哩的发布站，用于公布嘶哩嘶哩的最新可用域名。如果你使用的嘶哩嘶哩域名无法访问，那么这个页面可以帮你回到嘶哩嘶哩。<br /><br /><strong style="color:rgb(243, 143, 196);">此页面长期维护和更新，嘶哩嘶哩强烈建议收藏保存！</strong></p>
-            </div>
-
-            <h3>App下载</h3>
-            
-            <!-- 下载区域 -->
-            <div class="app-download-domain">
-                <!-- 哩哩动漫 (新版) -->
-                <div class="domain-status new-app">
-                    <div class="app-info">
-                        <img class="app-icon" src="https://i1.go2yd.com/image.php?url=YD_cnt_274_020K2XCb3Fjt" alt="哩哩动漫图标">
-                        <span class="app-name">哩哩动漫</span>
-                        <span class="tag recommend">新版推荐</span>
-                        <span class="tag interop">数据互通</span>
-                    </div>
-                    <div class="status-and-link">
-                        <span class="app-status">Android 1.0.2</span>
-                        <a href="https://www.silisili.link/app/%E5%93%A9%E5%93%A9%E5%8A%A8%E6%BC%AB_v1.0.2_14.apk" class="app-link" target="_blank">立即下载</a>
-                    </div>
-                </div>
-                
-                <div class="app-tip">
-                    💡 <strong>说明：</strong>哩哩动漫是嘶哩嘶哩的升级版，追番体验更好。新老 APP 会同时维护，账号数据互通，大家可根据喜好选择使用。
-                </div>
-
-                <!-- 嘶哩嘶哩 (原版安卓) -->
-                <div class="domain-status">
-                    <div class="app-info">
-                        <img class="app-icon" src="https://i1.go2yd.com/image.php?url=YD_cnt_139_01akTswvJfha" alt="嘶哩嘶哩图标">
-                        <span class="app-name">嘶哩嘶哩（原版）</span>
-                        <span class="tag" style="background:#f0f0f0;color:#666;">Android版</span>
-                    </div>
-                    <div class="status-and-link">
-                        <span class="app-status">3.2.5 版本</span>
-                        <a href="https://www.silisili.link/app/3.2.5.apk" class="app-link secondary">下载</a>
-                    </div>
-                </div>
-
-                <!-- 嘶哩嘶哩 (原版 iOS) -->
-                <div class="domain-status">
-                    <div class="app-info">
-                        <img class="app-icon" src="https://i1.go2yd.com/image.php?url=YD_cnt_139_01akTswvJfha" alt="嘶哩嘶哩图标">
-                        <span class="app-name">嘶哩嘶哩（原版）</span>
-                        <span class="tag" style="background:#f0f0f0;color:#666;">iOS版(自签)</span>
-                    </div>
-                    <div class="status-and-link">
-                        <span class="app-status">3.2.3 版本</span>
-                        <a href="https://www.silisili.link/app/3.2.3.ipa" class="app-link secondary">下载</a>
-                    </div>
-                </div>
-
-                <!-- 更多版本 -->
-                <div class="domain-status">
-                    <div class="app-info">
-                        <div class="app-icon" style="display:flex;align-items:center;justify-content:center;font-size:20px;background:#eaeaea;">📁</div>
-                        <span class="app-name">更多历史版本</span>
-                    </div>
-                    <div class="status-and-link">
-                        <span class="app-status">APP发布页</span>
-                        <a href="https://www.silisili.tv/" class="app-link secondary">前往</a>
-                    </div>
-                </div>
-            </div>
-            <!-- 下载区域结束 -->
-
-            <h3>嘶哩嘶哩域名</h3>
-            <div class="domain" id="results"></div>
-
-            <div class="content">
-                <p>以上域名打开会是个搜索页面，点击「logo」弹窗，或者输入「silisilinb」,等待奇迹发生。</p>
-                <p>如果显示「无法访问」，则代表本地网络无法连接到服务器，该域名被当地运营商屏蔽。</p>
-                <p>如果以上域名均显示无法访问，建议更改本机DNS尝试恢复正常访问（<a href="https://dudns.baidu.com/support/localdns/PC/index.html" target="_blank">PC电脑设置教程</a>、<a href="https://dudns.baidu.com/support/localdns/Mobile/index.html" target="_blank">手机设置教程</a>）。</p>
-                <div class="list">
-                    <div class="list-main">
-                        <div class="list-content">
-                            <h4>阿里DNS</h4>
-                            <p>223.5.5.5<br>223.6.6.6</p>
-                        </div>
-                        <div class="list-content">
-                            <h4>腾讯DNS</h4>
-                            <p>119.29.29.29</p>
-                        </div>
-                        <div class="list-content">
-                            <h4>114DNS</h4>
-                            <p>114.114.114.114<br>114.114.115.115</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-foot">
-                    若修改DNS后依然无法访问嘶哩嘶哩，那可能是缘分还不够。
-                </div>
-            </div>
-        </div>
-        <div class="copyright">© 2024 嘶哩嘶哩 All rights reserved.</div>
-    </div>
-
-    <div class="main">
-     <div class="box">
-           <div class="content">
-            <h4> 苹果应用自签全流程：</h4>
-            <h5> 电脑端：</h5>
-            <li>1、下载爱思助手，</li>
-            <li>2、连接苹果手机，</li>
-            <li>3、工具箱---IPA签名</li>
-            <li>4、使用apple id签名</li>
-            <li>5、添加Apple ID</li>
-            <li>6、输入完成appleid账号密码（包括86180*******，密码）</li>
-            <li>7、添加IPA文件（就是没有签名过的应用文件）</li>
-            <li>8、勾选ipa及appleid（2处都要点，有2处需要打钩！！）</li>
-            <li>9、点击开始签名</li>
-            <li>10、完成后，点击“打开已签名IPA位置”</li>
-            <li>11、双击应用开始安装</li>
-            <h5> 手机端：</h5>
-            <li>12、打开“通用”“设备管理”信任</li>
-            <li>13、打开开发者模式（隐私与安全、安全性、开发者模式）</li>
-            <h5> 签名错误提示，一般就3种情况：</h5>    
-            <li>第一种情况，提示，证书申请失败！（将鼠标移动至红色字体的位置。后面会出现一串这样的英文提示。)
-            get +XcodeToken+err+SRP_Setp1+err:hsc = 200+ec=-20101+au=+em = Your+account+information+was+entered+incorrectly.</li>
-            <li>这种情况是说明Apple ID账号有误，点击添加Apple ID，重新输入正确的账号和密码即可。（如果id是手机号，需要在手机号码前添加86，如果已经添加，核对账号填的对不对）</li>
-            <li>第二种情况，出现这类报错：get +XcodeToken+err+GetGsldmsToken+err:hsc = 401+ec = -22406+au=+em = Your+Apple+ID+or+password+is+incorrect.</li>
-            <li>这种情况是说明Apple ID账号或者密码有误，点击添加Apple ID，重新输入正确的账号和密码即可。</li>
-            <li>第三种情况，输入都是正确的，无法签名，此时需要将苹果id在苹果官网登录激活下，再重新签名</li>
-            <h4> 苹果已签名安装包（企业签不稳定，暂不签名，建议按上面流程自签）：</h4>
-           </div>  
-         </div> 
-           
-         <div class="box">    
-              <div class="content">
-                    <h4>更新日志</h4>
-                    <p>2026-10-10</p>
-                    <p>51、新增哩哩动漫APP v1.0.2版本，全新追番体验，数据与嘶哩嘶哩互通，可同时使用。</p>
-
-                    <p>2024-8-20</p>
-                    <p>50、APP升级到3.2.3版本</p>
-                    <p>2024-8-19</p>
-                    <p>48、PC端新增在线统计</p>
-                    <p>49、PC端新增实时聊天弹幕【鼠标右击“发送”可进行切换】</p>
-                    
-                    <p>2024-6-14</p>
-                    <p>47、APP升级到3.2.2版本，老版本将全部失联</p>
-
-                    <p>2024-6-1</p>
-                    <p>46、PC端弹幕系统更新，可以实时刷新弹幕，播放器新增在线观看人数显示。</p>
-
-                    <p>2024-5-21</p>
-                    <p>45、PC端新增桌面快捷应用功能，一键安装！</p>
-
-                    <p>2024-03-26</p>
-                    <p>44、PC端播放器升级，支持画中画功能。</p>
-                    
-                    <p>2024-1-11</p>
-                    <p>43、APP升级到3.0.0版本，优化播放器，新增P2P技术，新增搜索预览，新增最近播放，优化后端设置</p>
-                    
-                    <p>2024-01-06</p>
-                    <p>42、PC网页端新增云追番功能，追番记录调用收藏数据，跟随账号数据！-nice！</p>
-                    
-                    <p>2023-12-15</p>
-                    <p>41、PC网页端播放记录（时光机）进行了升级，最大支持100个番剧记录，播放记录包含更新信息，追剧提醒，播放进度，最大程度方便追番！</p>
-              </div>
-        </div>
-      </div>
-</body>
-</html>
+    }
+</style>
