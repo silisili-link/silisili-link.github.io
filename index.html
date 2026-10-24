@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="cleartype" content="on">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -32,7 +31,7 @@
             color: #00AEEC
         }
 
-        /* ================= 优化后的 App 下载区域样式 (防重叠版) ================= */
+        /* ================= 【修复版】App下载区域样式 ================= */
         .app-download-domain {
             display: flex;
             flex-direction: column;
@@ -45,13 +44,11 @@
             align-items: center;
             justify-content: space-between;
             background: #ffffff;
-            padding: 12px 16px;
-            border-radius: 10px;
+            padding: 14px 18px;
+            border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8e8e8;
             transition: all 0.3s ease;
-            flex-wrap: wrap;
-            gap: 12px;
             box-sizing: border-box;
         }
         
@@ -60,25 +57,24 @@
             transform: translateY(-1px);
         }
 
-        /* 新版高亮 */
+        /* 新版高亮行，粉色边框渐变背景，和截图一致 */
         .domain-status.new-app {
-            border: 2px solid #ffb6c1;
+            border: 2px solid #ffc8da;
             background: linear-gradient(135deg, #fffbfc, #fff0f5);
         }
 
-        /* 左侧：图标 + 名称 + 标签 */
+        /* 左侧区域：图标 + 名字 + 标签 */
         .app-info {
             display: flex;
             align-items: center;
             gap: 10px;
             flex: 1;
-            min-width: 180px;
-            flex-wrap: wrap;
+            min-width: 0; /* 关键：防止文字撑爆容器挤压右侧 */
         }
 
         .app-icon {
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             border-radius: 10px;
             object-fit: cover;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -88,14 +84,15 @@
 
         .app-name {
             font-weight: bold;
-            font-size: 15px;
+            font-size: 16px;
             color: #333;
             line-height: 1.2;
+            white-space: nowrap;
         }
 
         .tag {
-            font-size: 11px;
-            padding: 2px 8px;
+            font-size: 12px;
+            padding: 3px 9px;
             border-radius: 6px;
             font-weight: normal;
             white-space: nowrap;
@@ -104,45 +101,38 @@
         .tag.recommend {
             background: #ffe3f1;
             color: #d63384;
-            border: 1px solid #f8bbd0;
         }
         
         .tag.interop {
             background: #e3f2fd;
             color: #1976d2;
-            border: 1px solid #bbdefb;
         }
 
-        /* 右侧：版本信息 + 按钮 */
+        /* 右侧区域：版本号 + 按钮，固定顺序，互不挤压 */
         .status-and-link {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            gap: 15px;
+            gap: 16px;
             flex-shrink: 0;
-            z-index: 2;
-            position: relative;
         }
 
         .app-status {
-            font-size: 13px;
+            font-size: 14px;
             color: #888;
             white-space: nowrap;
-            flex-shrink: 0;
         }
 
         .app-link {
             display: inline-block;
-            padding: 8px 20px;
+            padding: 9px 22px;
             background: #00AEEC;
             color: #ffffff !important;
             text-decoration: none;
-            border-radius: 20px;
+            border-radius: 24px;
             font-size: 14px;
             font-weight: 500;
             transition: background 0.2s;
             white-space: nowrap;
-            flex-shrink: 0;
             border: none;
             line-height: 1.2;
         }
@@ -160,39 +150,39 @@
         }
 
         .app-link.secondary {
-            background: #777;
+            background: #707070;
         }
         .app-link.secondary:hover {
-            background: #555;
+            background: #555555;
         }
 
-        /* 说明文字 */
+        /* 说明提示框，紧贴新版下面 */
         .app-tip {
-            font-size: 13px;
-            color: #666;
+            font-size: 14px;
+            color: #555;
             line-height: 1.6;
-            margin-top: -4px;
-            margin-bottom: 4px;
-            padding: 10px 14px;
+            padding: 12px 16px;
             background: #fff9e6;
             border-radius: 8px;
             border-left: 4px solid #ffc107;
+            margin: -4px 0 4px;
         }
 
-        /* 移动端适配 */
-        @media (max-width: 600px) {
+        /* ========== 移动端修复，重点解决挤在一起、遮挡 ========== */
+        @media (max-width: 640px) {
             .domain-status {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 14px;
+                gap:12px;
+                padding:14px;
             }
             .app-info {
                 width: 100%;
+                flex-wrap: wrap;
             }
             .status-and-link {
-                width: 100%;
+                width:100%;
                 justify-content: space-between;
-                margin-top: 6px;
             }
         }
         /* ========================================================= */
@@ -210,7 +200,7 @@
 
             <h3>App下载</h3>
             
-            <!-- 优化后的下载区域 -->
+            <!-- 下载区域 -->
             <div class="app-download-domain">
                 <!-- 哩哩动漫 (新版) -->
                 <div class="domain-status new-app">
