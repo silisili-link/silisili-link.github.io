@@ -32,7 +32,7 @@
             color: #00AEEC
         }
 
-        /* ================= 优化后的 App 下载区域样式 ================= */
+        /* ================= 优化后的 App 下载区域样式 (防重叠版) ================= */
         .app-download-domain {
             display: flex;
             flex-direction: column;
@@ -50,8 +50,9 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8e8e8;
             transition: all 0.3s ease;
-            flex-wrap: wrap; /* 防止内容溢出 */
+            flex-wrap: wrap;
             gap: 12px;
+            box-sizing: border-box;
         }
         
         .domain-status:hover {
@@ -71,7 +72,8 @@
             align-items: center;
             gap: 10px;
             flex: 1;
-            min-width: 200px;
+            min-width: 180px;
+            flex-wrap: wrap;
         }
 
         .app-icon {
@@ -81,12 +83,14 @@
             object-fit: cover;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             background-color: #f0f0f0;
+            flex-shrink: 0;
         }
 
         .app-name {
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
             color: #333;
+            line-height: 1.2;
         }
 
         .tag {
@@ -113,14 +117,18 @@
         .status-and-link {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-left: auto; /* 靠右对齐 */
+            justify-content: flex-end;
+            gap: 15px;
+            flex-shrink: 0;
+            z-index: 2;
+            position: relative;
         }
 
         .app-status {
             font-size: 13px;
             color: #888;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .app-link {
@@ -134,7 +142,9 @@
             font-weight: 500;
             transition: background 0.2s;
             white-space: nowrap;
+            flex-shrink: 0;
             border: none;
+            line-height: 1.2;
         }
 
         .app-link:hover {
@@ -176,18 +186,13 @@
                 align-items: flex-start;
                 padding: 14px;
             }
+            .app-info {
+                width: 100%;
+            }
             .status-and-link {
                 width: 100%;
                 justify-content: space-between;
                 margin-top: 6px;
-                margin-left: 0;
-            }
-            .app-link {
-                padding: 8px 16px;
-            }
-            .app-info {
-                width: 100%;
-                flex-wrap: wrap;
             }
         }
         /* ========================================================= */
@@ -329,7 +334,7 @@
          <div class="box">    
               <div class="content">
                     <h4>更新日志</h4>
-                    <p>2024-11-XX</p>
+                    <p>2026-10-10</p>
                     <p>51、新增哩哩动漫APP v1.0.2版本，全新追番体验，数据与嘶哩嘶哩互通，可同时使用。</p>
 
                     <p>2024-8-20</p>
@@ -343,7 +348,21 @@
 
                     <p>2024-6-1</p>
                     <p>46、PC端弹幕系统更新，可以实时刷新弹幕，播放器新增在线观看人数显示。</p>
-                    <!-- 省略下方日志，保持原样即可 -->
+
+                    <p>2024-5-21</p>
+                    <p>45、PC端新增桌面快捷应用功能，一键安装！</p>
+
+                    <p>2024-03-26</p>
+                    <p>44、PC端播放器升级，支持画中画功能。</p>
+                    
+                    <p>2024-1-11</p>
+                    <p>43、APP升级到3.0.0版本，优化播放器，新增P2P技术，新增搜索预览，新增最近播放，优化后端设置</p>
+                    
+                    <p>2024-01-06</p>
+                    <p>42、PC网页端新增云追番功能，追番记录调用收藏数据，跟随账号数据！-nice！</p>
+                    
+                    <p>2023-12-15</p>
+                    <p>41、PC网页端播放记录（时光机）进行了升级，最大支持100个番剧记录，播放记录包含更新信息，追剧提醒，播放进度，最大程度方便追番！</p>
               </div>
         </div>
       </div>
