@@ -23,54 +23,139 @@
         ul {
             padding-left: 20px;
         }
-
-            ul li {
-                line-height: 2.3
-            }
-
+        ul li {
+            line-height: 2.3
+        }
         a {
             color: #00AEEC
         }
-        /* 追加修复布局，不影响原有其他样式 */
-        .domain-status {
+
+        /* ========== App下载卡片专属样式 ========== */
+        .app-download-domain {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .app-download-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
             align-items: center;
-            gap:12px;
-            padding:12px 16px;
-            background:#fff;
-            border-radius:8px;
-            margin-bottom:8px;
+            justify-content: space-between;
+            gap: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            border: 1px solid #ececec;
             box-sizing: border-box;
         }
-        .domain-status .name {
-            flex: 1;
+        .app-download-card .app-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             min-width: 0;
-            white-space: nowrap;
-            overflow:hidden;
-            text-overflow:ellipsis;
+            flex: 1;
         }
-        .status-and-link {
+        .app-download-card .app-icon-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .app-download-card .app-text .app-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 2px;
+        }
+        .app-download-card .app-text .app-sub {
+            font-size: 12px;
+            color: #888;
+        }
+        .app-download-card .tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+        .app-download-card .tag.new {
+            background: #fff0f6;
+            color: #d63384;
+            border: 1px solid #ffd1e8;
+        }
+        .app-download-card .tag.hot {
+            background: #fff7e6;
+            color: #b56500;
+            border: 1px solid #ffe5b4;
+        }
+        .app-download-card .status-wrap {
             display:flex;
             align-items:center;
-            gap:12px;
+            gap:10px;
             flex-shrink:0;
         }
-        .app-status {
-            white-space:nowrap;
-            color:#888;
+        .app-download-card .status {
+            font-size: 13px;
+            color: #999;
+            white-space: nowrap;
         }
-        .app-link {
-            padding:8px 20px;
-            border-radius:20px;
-            text-decoration:none;
-            color:#fff;
-            background:#777;
-            white-space:nowrap;
+        .app-download-card .btn {
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+        }
+        .app-download-card .btn-pink {
+            background: #ff4d94;
+            color: #fff;
+        }
+        .app-download-card .btn-pink:hover {
+            background: #e04385;
+        }
+        .app-download-card .btn-gray {
+            background: #f2f2f2;
+            color: #333;
+        }
+        .app-download-card .btn-gray:hover {
+            background: #e6e6e6;
+        }
+        .app-download-tip {
+            background: #fffaf2;
+            border-left: 4px solid #ffc94d;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .app-download-tip strong {
+            color: #333;
+        }
+
+        /* 手机端适配 */
+        @media (max-width:640px){
+            .container{
+                width:92%;
+                padding:4%;
+            }
+            .app-download-card{
+                flex-direction:column;
+                align-items:flex-start;
+            }
+            .app-download-card .app-left{
+                width:100%;
+            }
+            .app-download-card .status-wrap{
+                width:100%;
+                justify-content:space-between;
+            }
         }
     </style>
-
-
 </head>
 <body>
     <div class="main">
@@ -84,35 +169,70 @@
 
             <h3>App下载</h3>
             <div class="app-download-domain">
-                <div class="domain-status" style="background:#fff0f5;border:1px solid #ffc8da;">
-                    <span class="name">哩哩动漫 <span style="font-size:12px;color:#d63384;">新版推荐</span> <span style="font-size:12px;color:#1976d2;background:#e3f2fd;padding:1px 5px;border-radius:4px;">数据互通</span></span>
-                    <div class="status-and-link">
-                        <span class="app-status">Android 1.0.2</span>
-                        <a href="#" class="app-link" style="background:#ff69b4;">下载</a>
+                <!-- 主推哩哩动漫，使用真实图标 -->
+                <div class="app-download-card" style="border: 1px solid #ffd1e8; background: linear-gradient(135deg,#ffffff,#fff7fb);">
+                    <div class="app-left">
+                        <img class="app-icon-img" src="https://i1.go2yd.com/image.php?url=YD_cnt_274_020K2XCb3Fjt" alt="哩哩动漫图标">
+                        <div class="app-text">
+                            <div class="app-title">哩哩动漫</div>
+                            <div class="app-sub">全新升级版 · 数据互通</div>
+                        </div>
+                        <span class="tag new">新版推荐</span>
+                    </div>
+                    <div class="status-wrap">
+                        <span class="status">Android 1.0.2</span>
+                        <a href="#" class="btn btn-pink">立即下载</a>
                     </div>
                 </div>
-                <div style="padding:8px 12px;background:#fff9e6;border-left:4px solid #ffc107;border-radius:6px;margin:4px 0 8px;font-size:14px;color:#555;">
-                    💡说明：哩哩动漫是嘶哩嘶哩的升级版，追番体验更好。新老APP会同时维护，账号数据互通，大家可根据喜好选择使用。
+
+                <!-- 提示说明 -->
+                <div class="app-download-tip">
+                    💡 <strong>说明：</strong>哩哩动漫是嘶哩嘶哩的升级版，追番体验更好。新老 APP 会同时维护，账号数据互通，大家可根据喜好选择使用。
                 </div>
-                <div class="domain-status">
-                    <span class="name">Android版</span>
-                    <div class="status-and-link">
-                        <span class="app-status">3.2.5版本</span>
-                        <a href="shturl.cc/rIXVK6ifqFli3FzRSe2D1ZsLIpJ6r" class="app-link">下载</a>
+
+                <!-- 原版安卓 嘶哩嘶哩 真实图标 -->
+                <div class="app-download-card">
+                    <div class="app-left">
+                        <img class="app-icon-img" src="https://i1.go2yd.com/image.php?url=YD_cnt_139_01akTswvJfha" alt="嘶哩嘶哩图标">
+                        <div class="app-text">
+                            <div class="app-title">嘶哩嘶哩 Android版</div>
+                            <div class="app-sub">原版安卓客户端</div>
+                        </div>
+                        <span class="tag hot">稳定维护</span>
+                    </div>
+                    <div class="status-wrap">
+                        <span class="status">3.2.5 版本</span>
+                        <a href="" class="btn btn-gray">下载</a>
                     </div>
                 </div>
-                <div class="domain-status">
-                    <span class="name">iOS版(自签)</span>
-                    <div class="status-and-link">
-                        <span class="app-status">3.2.3版本</span>
-                        <a href="shturl.cc/WMn5myZXTVZKHFyT6jdcunp63sPFh" class="app-link">下载</a>
+
+                <!-- iOS自签 -->
+                <div class="app-download-card">
+                    <div class="app-left">
+                        <img class="app-icon-img" src="shturl.cc/bQRHCsPa715fPp9z59AstUEsYzbHIZWyk6kIKHcsLD9n62Pw" alt="嘶哩嘶哩图标">
+                        <div class="app-text">
+                            <div class="app-title">嘶哩嘶哩 iOS版</div>
+                            <div class="app-sub">自签安装包</div>
+                        </div>
+                    </div>
+                    <div class="status-wrap">
+                        <span class="status">3.2.3 版本</span>
+                        <a href="" class="btn btn-gray">下载</a>
                     </div>
                 </div>
-                <div class="domain-status">
-                    <span class="name">更多版本</span>
-                    <div class="status-and-link">
-                        <span class="app-status">APP发布页</span>
-                        <a href="shturl.cc/NUXQze6DcatasV" class="app-link">前往</a>
+
+                <!-- 更多版本 -->
+                <div class="app-download-card">
+                    <div class="app-left">
+                        <img class="app-icon-img" src="shturl.cc/bQRHCsPa715fPp9z59AstUEsYzbHIZWyk6kIKHcsLD9n62Pw" alt="嘶哩嘶哩图标">
+                        <div class="app-text">
+                            <div class="app-title">更多历史版本</div>
+                            <div class="app-sub">前往 APP 发布页查看</div>
+                        </div>
+                    </div>
+                    <div class="status-wrap">
+                        <span class="status">APP发布页</span>
+                        <a href="" class="btn btn-gray">前往</a>
                     </div>
                 </div>
             </div>
@@ -175,8 +295,6 @@ get +XcodeToken+err+SRP_Setp1+err:hsc = 200+ec=-20101+au=+em = Your+account+info
 <li>这种情况是说明Apple ID账号或者密码有误，点击添加Apple ID，重新输入正确的账号和密码即可。</li>
 <li>第三种情况，输入都是正确的，无法签名，此时需要将苹果id在苹果官网登录激活下，再重新签名</li>
          <h4> 苹果已签名安装包（企业签不稳定，暂不签名，建议按上面流程自签）：</h4>
-
-
   </div>
  </div>
 
@@ -184,31 +302,19 @@ get +XcodeToken+err+SRP_Setp1+err:hsc = 200+ec=-20101+au=+em = Your+account+info
       <div class="content">
             <h4>更新日志</h4>
 <p > 2024-8-20</p>
-
 <p >  50、APP升级到3.2.3版本</p>
 <p > 2024-8-19</p>
-
 <p >  48、PC端新增在线统计</p>
 <p >  49、PC端新增实时聊天弹幕【鼠标右击“发送”可进行切换】</p>
-
 <p > 2024-6-14</p>
-
 <p >  47、APP升级到3.2.2版本，老版本将全部失联</p>
-
 <p > 2024-6-1</p>
-
 <p >  46、PC端弹幕系统更新，可以实时刷新弹幕，播放器新增在线观看人数显示。</p>
-
 <p >  2024-03-26</p>
-
 <p >  44、PC端播放器升级，支持画中画功能。</p>
-
 <p >     2024-1-11</p>
-
 <p >43、APP升级到3.0.0版本，优化播放器，新增P2P技术，新增搜索预览，新增最近播放，优化后端设置</p>
-
 <p >2024-01-06</p>
-
 <p >42、PC网页端新增云追番功能，追番记录调用收藏数据，跟随账号数据！-nice！</p>
          <p >
     2023-12-15
@@ -231,7 +337,6 @@ get +XcodeToken+err+SRP_Setp1+err:hsc = 200+ec=-20101+au=+em = Your+account+info
 <p >
     38、网页版页面代码重构，不清楚使用方法建议加闲聊群。
 </p>
-
  <p >
     2023-7-24
 </p>
@@ -427,8 +532,6 @@ get +XcodeToken+err+SRP_Setp1+err:hsc = 200+ec=-20101+au=+em = Your+account+info
 <p>
     3、新增会员中心
 </p>
-
-
         </ul>
            </div>
     </div>
