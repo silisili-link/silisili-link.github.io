@@ -1,526 +1,605 @@
 <!doctype html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="cleartype" content="on">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>嘶哩嘶哩-永久网址发布页</title>
-    <link rel="stylesheet" href="style.css?9">
-    <script src="index.js?8" defer></script>
-    <link rel="shortcut icon" href="#">
-    <style>
-        .container {
-            width: 60%;
-            margin: 2% auto 0;
-            background-color: #f0f0f0;
-            padding: 2% 5%;
-            box-shadow:0 5px 15px rgb(20 20 20 / 80%);
-            border-radius: 10px
-        }
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>嘶哩嘶哩-永久网址发布页</title>
+<link rel="stylesheet" href="style.css?9">
+<script src="index.js?8" defer></script>
+<link rel="shortcut icon" href="#">
+<style>
+    /* 基础兜底样式，确保页面独立可读 */
+    body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: #f5f6f8;
+        color: #333;
+        line-height: 1.6;
+    }
+    .main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 20px 16px 40px;
+    }
+    .logo { text-align: center; margin: 8px 0 22px; }
+    .logo img { max-width: 120px; height: auto; }
+    .box {
+        background: #fff;
+        border-radius: 14px;
+        padding: 22px 24px;
+        margin-bottom: 18px;
+        box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    }
+    .content { font-size: 14px; color: #555; }
+    .content strong { color: #333; }
+    h3 { font-size: 18px; margin: 26px 0 12px; color: #222; }
+    h4 { font-size: 16px; margin: 18px 0 10px; color: #222; }
+    h5 { font-size: 14px; margin: 14px 0 8px; color: #444; }
+    a { color: #00AEEC; }
 
-        ul {
-            padding-left: 20px;
-        }
-        ul li {
-            line-height: 2.3
-        }
-        a {
-            color: #00AEEC
-        }
+    /* ========== App 下载卡片 ========== */
+    .app-download-domain {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 10px;
+    }
+    .app-download-card {
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        border: 1px solid #ececec;
+        box-sizing: border-box;
+    }
+    .app-download-card .app-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+        flex: 1;
+    }
+    .app-download-card .app-icon-img {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+    .app-download-card .app-text .app-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 2px;
+    }
+    .app-download-card .app-text .app-sub {
+        font-size: 12px;
+        color: #888;
+    }
+    .app-download-card .tag {
+        font-size: 12px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        white-space: nowrap;
+    }
+    .app-download-card .tag.new {
+        background: #fff0f6;
+        color: #d63384;
+        border: 1px solid #ffd1e8;
+    }
+    .app-download-card .tag.hot {
+        background: #fff7e6;
+        color: #b56500;
+        border: 1px solid #ffe5b4;
+    }
+    .app-download-card .tag.pc {
+        background: #eef7ff;
+        color: #1677c8;
+        border: 1px solid #b8dcff;
+    }
+    .app-download-card .status-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+    .app-download-card .status {
+        font-size: 13px;
+        color: #999;
+        white-space: nowrap;
+    }
+    .app-download-card .btn {
+        padding: 8px 18px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        border: none;
+        cursor: pointer;
+        display: inline-block;
+    }
+    .app-download-card .btn-pink { background: #ff4d94; color: #fff; }
+    .app-download-card .btn-pink:hover { background: #e04385; }
+    .app-download-card .btn-gray { background: #f2f2f2; color: #333; }
+    .app-download-card .btn-gray:hover { background: #e6e6e6; }
+    .app-download-card .btn-blue { background: #2b8cff; color: #fff; }
+    .app-download-card .btn-blue:hover { background: #1a75e0; }
 
-        /* ========== App下载卡片专属样式 ========== */
-        .app-download-domain {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 10px;
-        }
+    .app-download-tip {
+        background: #fffaf2;
+        border-left: 4px solid #ffc94d;
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 14px;
+        color: #555;
+        line-height: 1.6;
+    }
+    .app-download-tip strong { color: #333; }
+
+    /* ========== 更新日志结构化样式 ========== */
+    .log-list { margin-top: 6px; }
+    .log-item {
+        padding: 10px 0;
+        border-bottom: 1px dashed #eee;
+    }
+    .log-item:last-child { border-bottom: none; }
+    .log-date {
+        font-size: 13px;
+        font-weight: 700;
+        color: #ff4d94;
+        margin-bottom: 4px;
+    }
+    .log-content {
+        margin: 0;
+        padding-left: 18px;
+        color: #555;
+        font-size: 14px;
+    }
+    .log-content li { margin-bottom: 3px; }
+    .log-note {
+        color: #999;
+        font-size: 13px;
+        margin-top: 4px;
+    }
+
+    /* ========== 列表 ========== */
+    ul.plain-list {
+        padding-left: 20px;
+        margin: 6px 0 12px;
+    }
+    ul.plain-list li {
+        line-height: 2;
+        font-size: 14px;
+        color: #555;
+    }
+
+    /* ========== 手机端适配 ========== */
+    @media (max-width: 640px) {
+        .box { padding: 16px; }
         .app-download-card {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 14px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-            border: 1px solid #ececec;
-            box-sizing: border-box;
+            flex-direction: column;
+            align-items: flex-start;
         }
-        .app-download-card .app-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 0;
-            flex: 1;
-        }
-        .app-download-card .app-icon-img {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-        .app-download-card .app-text .app-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 2px;
-        }
-        .app-download-card .app-text .app-sub {
-            font-size: 12px;
-            color: #888;
-        }
-        .app-download-card .tag {
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 999px;
-            white-space: nowrap;
-        }
-        .app-download-card .tag.new {
-            background: #fff0f6;
-            color: #d63384;
-            border: 1px solid #ffd1e8;
-        }
-        .app-download-card .tag.hot {
-            background: #fff7e6;
-            color: #b56500;
-            border: 1px solid #ffe5b4;
-        }
+        .app-download-card .app-left { width: 100%; }
         .app-download-card .status-wrap {
-            display:flex;
-            align-items:center;
-            gap:10px;
-            flex-shrink:0;
+            width: 100%;
+            justify-content: space-between;
         }
-        .app-download-card .status {
-            font-size: 13px;
-            color: #999;
-            white-space: nowrap;
-        }
-        .app-download-card .btn {
-            padding: 8px 18px;
-            border-radius: 999px;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            white-space: nowrap;
-            border: none;
-            cursor: pointer;
-        }
-        .app-download-card .btn-pink {
-            background: #ff4d94;
-            color: #fff;
-        }
-        .app-download-card .btn-pink:hover {
-            background: #e04385;
-        }
-        .app-download-card .btn-gray {
-            background: #f2f2f2;
-            color: #333;
-        }
-        .app-download-card .btn-gray:hover {
-            background: #e6e6e6;
-        }
-        .app-download-tip {
-            background: #fffaf2;
-            border-left: 4px solid #ffc94d;
-            border-radius: 10px;
-            padding: 12px 14px;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.6;
-        }
-        .app-download-tip strong {
-            color: #333;
-        }
-
-        /* 手机端适配 */
-        @media (max-width:640px){
-            .container{
-                width:92%;
-                padding:4%;
-            }
-            .app-download-card{
-                flex-direction:column;
-                align-items:flex-start;
-            }
-            .app-download-card .app-left{
-                width:100%;
-            }
-            .app-download-card .status-wrap{
-                width:100%;
-                justify-content:space-between;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
-    <div class="main">
-        <div class="logo">
-            <img src="https://tncache1-f1.v3mh.com/image/2024/07/20/1cf2e889e9604466769a3f2544180b47.png" alt="Logo">
-        </div>
-        <div class="box">
-            <div class="content">
-                <p>这里是嘶哩嘶哩的发布站，用于公布嘶哩嘶哩的最新可用域名。如果你使用的嘶哩嘶哩域名无法访问，那么这个页面可以帮你回到嘶哩嘶哩。<br /><br /><strong style="color:rgb(243, 143, 196);">此页面长期维护和更新，嘶哩嘶哩强烈建议收藏保存！</strong></p>
-            </div>
-
-            <h3>App下载</h3>
-            <div class="app-download-domain">
-                <!-- 主推哩哩动漫，使用真实图标 -->
-                <div class="app-download-card" style="border: 1px solid #ffd1e8; background: linear-gradient(135deg,#ffffff,#fff7fb);">
-                    <div class="app-left">
-                        <img class="app-icon-img" src="https://i1.go2yd.com/image.php?url=YD_cnt_274_020K2XCb3Fjt" alt="哩哩动漫图标">
-                        <div class="app-text">
-                            <div class="app-title">哩哩动漫</div>
-                            <div class="app-sub">全新升级版 · 数据互通</div>
-                        </div>
-                        <span class="tag new">新版推荐</span>
-                    </div>
-                    <div class="status-wrap">
-                        <span class="status">Android 1.0.5+</span>
-                        <a href="https://feishu.doubao.com/drive/file/KmZYb3J95os0rVx5H5QciSuGnLg" class="btn btn-pink">立即下载</a>
-                    </div>
-                </div>
-
-                <!-- 提示说明 -->
-                <div class="app-download-tip">
-                    💡 <strong>说明：</strong>哩哩动漫是嘶哩嘶哩的升级版，追番体验更好。新老 APP 会同时维护，账号数据互通，大家可根据喜好选择使用。
-                </div>
-
-                <!-- 原版安卓 嘶哩嘶哩 真实图标 -->
-                <div class="app-download-card">
-                    <div class="app-left">
-                        <img class="app-icon-img" src="https://i1.go2yd.com/image.php?url=YD_cnt_139_01akTswvJfha" alt="嘶哩嘶哩图标">
-                        <div class="app-text">
-                            <div class="app-title">嘶哩嘶哩 Android版</div>
-                            <div class="app-sub">原版安卓客户端</div>
-                        </div>
-                        <span class="tag hot">不再维护</span>
-                    </div>
-                    <div class="status-wrap">
-                        <span class="status">3.2.5 版本</span>
-                        <a href="https://www.silisili.link/app/3.2.5.apk" class="btn btn-gray">下载</a>
-                    </div>
-                </div>
-
-                <!-- iOS自签 -->
-                <div class="app-download-card">
-                    <div class="app-left">
-                        <img class="app-icon-img" src="https://i1.go2yd.com/image.php?url=YD_cnt_139_01akTswvJfha" alt="嘶哩嘶哩图标">
-                        <div class="app-text">
-                            <div class="app-title">嘶哩嘶哩 iOS版</div>
-                            <div class="app-sub">自签安装包</div>
-                        </div>
-                    </div>
-                    <div class="status-wrap">
-                        <span class="status">3.2.3 版本</span>
-                        <a href="https://www.silisili.link/app/3.2.3.ipa" class="btn btn-gray">下载</a>
-                    </div>
-                </div>
-
-             </div>
-
-            <h3>嘶哩嘶哩域名</h3>
-            <div class="domain" id="results"></div>
-
-            <div class="content">
-                <p>以上域名打开会是个搜索页面，点击「logo」弹窗，或者输入「silisilinb」,等待奇迹发生。</p>
-                <p>如果显示「无法访问」，则代表本地网络无法连接到服务器，该域名被当地运营商屏蔽。</p>
-                <p>如果以上域名均显示无法访问，建议更改本机DNS尝试恢复正常访问（<a href="https://dudns.baidu.com/support/localdns/PC/index.html" target="_blank">PC电脑设置教程</a>、<a href="https://dudns.baidu.com/support/localdns/Mobile/index.html" target="_blank">手机设置教程</a>）。</p>
-                <div class="list">
-                    <div class="list-main">
-                        <div class="list-content">
-                            <h4>阿里DNS</h4>
-                            <p>223.5.5.5<br>223.6.6.6</p>
-                        </div>
-                        <div class="list-content">
-                            <h4>腾讯DNS</h4>
-                            <p>119.29.29.29</p>
-                        </div>
-                        <div class="list-content">
-                            <h4>114DNS</h4>
-                            <p>114.114.114.114<br>114.114.115.115</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-foot">
-                    若修改DNS后依然无法访问嘶哩嘶哩，那可能是缘分还不够。
-                </div>
-            </div>
-        </div>
-        <div class="copyright">© 2024 嘶哩嘶哩 All rights reserved.</div>
+<div class="main">
+    <div class="logo">
+        <img src="https://tncache1-f1.v3mh.com/image/2024/07/20/1cf2e889e9604466769a3f2544180b47.png" alt="Logo">
     </div>
 
-    <div class="main">
-     <div class="box">
-           <div class="content">
-            <h4> 苹果应用自签全流程：</h4>
-            <h5> 电脑端：</h5>
-<li>1、下载爱思助手，</li>
-<li>2、连接苹果手机，</li>
-<li>3、工具箱---IPA签名</li>
-<li>4、使用apple id签名</li>
-<li>5、添加Apple ID</li>
-<li>6、输入完成appleid账号密码（包括86180*******，密码）</li>
-<li>7、添加IPA文件（就是没有签名过的应用文件）</li>
-<li>8、勾选ipa及appleid（2处都要点，有2处需要打钩！！）</li>
-<li>9、点击开始签名</li>
-<li>10、完成后，点击“打开已签名IPA位置”</li>
-<li>11、双击应用开始安装</li>
-            <h5> 手机端：</h5>
-<li>12、打开“通用”“设备管理”信任</li>
-<li>13、打开开发者模式（隐私与安全、安全性、开发者模式）</li>
-      <h5> 签名错误提示，一般就3种情况：</h5>
-   <li>第一种情况，提示，证书申请失败！（将鼠标移动至红色字体的位置。后面会出现一串这样的英文提示。)
-get +XcodeToken+err+SRP_Setp1+err:hsc = 200+ec=-20101+au=+em = Your+account+information+was+entered+incorrectly.</li>
-  <li>这种情况是说明Apple ID账号有误，点击添加Apple ID，重新输入正确的账号和密码即可。（如果id是手机号，需要在手机号码前添加86，如果已经添加，核对账号填的对不对）</li>
-<li>第二种情况，出现这类报错：get +XcodeToken+err+GetGsldmsToken+err:hsc = 401+ec = -22406+au=+em = Your+Apple+ID+or+password+is+incorrect.</li>
-<li>这种情况是说明Apple ID账号或者密码有误，点击添加Apple ID，重新输入正确的账号和密码即可。</li>
-<li>第三种情况，输入都是正确的，无法签名，此时需要将苹果id在苹果官网登录激活下，再重新签名</li>
-         <h4> 苹果已签名安装包（企业签不稳定，暂不签名，建议按上面流程自签）：</h4>
-  </div>
- </div>
+    <!-- ================= 主信息区 ================= -->
+    <div class="box">
+        <div class="content">
+            <p>这里是嘶哩嘶哩的发布站，用于公布嘶哩嘶哩的最新可用域名。如果你使用的嘶哩嘶哩域名无法访问，那么这个页面可以帮你回到嘶哩嘶哩。<br><br><strong style="color:#f38fc4;">此页面长期维护和更新，嘶哩嘶哩强烈建议收藏保存！</strong></p>
+        </div>
 
- <div class="box">
-      <div class="content">
+        <h3>App下载</h3>
+        <div class="app-download-domain">
+
+            <!-- 哩哩动漫（升级版） -->
+            <div class="app-download-card" style="border: 1px solid #ffd1e8; background: linear-gradient(135deg,#ffffff,#fff7fb);">
+                <div class="app-left">
+                    <img class="app-icon-img" src="https://i1.go2yd.com/image.php?url=YD_cnt_274_020K2XCb3Fjt" alt="哩哩动漫图标">
+                    <div class="app-text">
+                        <div class="app-title">哩哩动漫</div>
+                        <div class="app-sub">全新升级版 · 数据互通</div>
+                    </div>
+                    <span class="tag new">新版推荐</span>
+                </div>
+                <div class="status-wrap">
+                    <span class="status">Android 1.0.6</span>
+                    <a href="https://silisili.lanzouu.com/iLFjx4fropij" class="btn btn-pink">立即下载</a>
+                </div>
+            </div>
+
+            <!-- 提示说明 -->
+            <div class="app-download-tip">
+                💡 <strong>说明：</strong>哩哩动漫是嘶哩嘶哩的升级版，追番体验更好。新老 APP 会同时维护，账号数据互通，大家可根据喜好选择使用。
+            </div>
+
+            <!-- 嘶哩嘶哩 Android版（原版） -->
+            <div class="app-download-card">
+                <div class="app-left">
+                    <img class="app-icon-img" src="https://i1.go2yd.com/image.php?url=YD_cnt_139_01akTswvJfha" alt="嘶哩嘶哩图标">
+                    <div class="app-text">
+                        <div class="app-title">嘶哩嘶哩 Android版</div>
+                        <div class="app-sub">原版安卓客户端</div>
+                    </div>
+                    <span class="tag hot">不再维护</span>
+                </div>
+                <div class="status-wrap">
+                    <span class="status">3.2.5 版本</span>
+                    <a href="https://www.silisili.link/app/3.2.5.apk" class="btn btn-gray">下载</a>
+                </div>
+            </div>
+
+            <!-- 嘶哩嘶哩 iOS版 -->
+            <div class="app-download-card">
+                <div class="app-left">
+                    <img class="app-icon-img" src="https://i1.go2yd.com/image.php?url=YD_cnt_139_01akTswvJfha" alt="嘶哩嘶哩图标">
+                    <div class="app-text">
+                        <div class="app-title">嘶哩嘶哩 iOS版</div>
+                        <div class="app-sub">自签安装包</div>
+                    </div>
+                </div>
+                <div class="status-wrap">
+                    <span class="status">3.2.3 版本</span>
+                    <a href="https://www.silisili.link/app/3.2.3.ipa" class="btn btn-gray">下载</a>
+                </div>
+            </div>
+
+            <!-- ✅ 新增：PC版 -->
+            <div class="app-download-card" style="border: 1px solid #cfe8ff; background: linear-gradient(135deg,#ffffff,#f5fbff);">
+                <div class="app-left">
+                    <img class="app-icon-img" src="https://i1.go2yd.com/image.php?url=YD_cnt_274_020K2XCb3Fjt" alt="哩哩动漫PC版图标">
+                    <div class="app-text">
+                        <div class="app-title">哩哩动漫 PC版</div>
+                        <div class="app-sub">电脑端客户端 · 数据互通</div>
+                    </div>
+                    <span class="tag pc">电脑版</span>
+                </div>
+                <div class="status-wrap">
+                    <span class="status">Windows</span>
+                    <a href="https://silisili.lanzouu.com/i7HA64froodi" class="btn btn-blue" target="_blank" rel="noopener">立即下载</a>
+                </div>
+            </div>
+
+        </div>
+
+        <h3>嘶哩嘶哩域名</h3>
+        <div class="domain" id="results"></div>
+
+        <div class="content">
+            <p>以上域名打开会是个搜索页面，点击「logo」弹窗，或者输入「silisilinb」,等待奇迹发生。</p>
+            <p>如果显示「无法访问」，则代表本地网络无法连接到服务器，该域名被当地运营商屏蔽。</p>
+            <p>如果以上域名均显示无法访问，建议更改本机DNS尝试恢复正常访问（<a href="https://dudns.baidu.com/support/localdns/PC/index.html" target="_blank">PC电脑设置教程</a>、<a href="https://dudns.baidu.com/support/localdns/Mobile/index.html" target="_blank">手机设置教程</a>）。</p>
+            <div class="list">
+                <div class="list-main">
+                    <div class="list-content">
+                        <h4>阿里DNS</h4>
+                        <p>223.5.5.5<br>223.6.6.6</p>
+                    </div>
+                    <div class="list-content">
+                        <h4>腾讯DNS</h4>
+                        <p>119.29.29.29</p>
+                    </div>
+                    <div class="list-content">
+                        <h4>114DNS</h4>
+                        <p>114.114.114.114<br>114.114.115.115</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-foot">
+                若修改DNS后依然无法访问嘶哩嘶哩，那可能是缘分还不够。
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 苹果自签教程 ================= -->
+    <div class="box">
+        <div class="content">
+            <h4>苹果应用自签全流程：</h4>
+            <h5>电脑端：</h5>
+            <ul class="plain-list">
+                <li>1、下载爱思助手，</li>
+                <li>2、连接苹果手机，</li>
+                <li>3、工具箱---IPA签名</li>
+                <li>4、使用apple id签名</li>
+                <li>5、添加Apple ID</li>
+                <li>6、输入完成appleid账号密码（包括86180*******，密码）</li>
+                <li>7、添加IPA文件（就是没有签名过的应用文件）</li>
+                <li>8、勾选ipa及appleid（2处都要点，有2处需要打钩！！）</li>
+                <li>9、点击开始签名</li>
+                <li>10、完成后，点击“打开已签名IPA位置”</li>
+                <li>11、双击应用开始安装</li>
+            </ul>
+            <h5>手机端：</h5>
+            <ul class="plain-list">
+                <li>12、打开“通用”“设备管理”信任</li>
+                <li>13、打开开发者模式（隐私与安全、安全性、开发者模式）</li>
+            </ul>
+            <h5>签名错误提示，一般就3种情况：</h5>
+            <ul class="plain-list">
+                <li>第一种情况，提示，证书申请失败！（将鼠标移动至红色字体的位置。后面会出现一串这样的英文提示。)<br>get +XcodeToken+err+SRP_Setp1+err:hsc = 200+ec=-20101+au=+em = Your+account+information+was+entered+incorrectly.</li>
+                <li>这种情况是说明Apple ID账号有误，点击添加Apple ID，重新输入正确的账号和密码即可。（如果id是手机号，需要在手机号码前添加86，如果已经添加，核对账号填的对不对）</li>
+                <li>第二种情况，出现这类报错：get +XcodeToken+err+GetGsldmsToken+err:hsc = 401+ec = -22406+au=+em = Your+Apple+ID+or+password+is+incorrect.</li>
+                <li>这种情况是说明Apple ID账号或者密码有误，点击添加Apple ID，重新输入正确的账号和密码即可。</li>
+                <li>第三种情况，输入都是正确的，无法签名，此时需要将苹果id在苹果官网登录激活下，再重新签名</li>
+            </ul>
+            <h4>苹果已签名安装包（企业签不稳定，暂不签名，建议按上面流程自签）：</h4>
+        </div>
+    </div>
+
+    <!-- ================= 更新日志 ================= -->
+    <div class="box">
+        <div class="content">
             <h4>更新日志</h4>
-<p > 2024-8-20</p>
-<p >  50、APP升级到3.2.3版本</p>
-<p > 2024-8-19</p>
-<p >  48、PC端新增在线统计</p>
-<p >  49、PC端新增实时聊天弹幕【鼠标右击“发送”可进行切换】</p>
-<p > 2024-6-14</p>
-<p >  47、APP升级到3.2.2版本，老版本将全部失联</p>
-<p > 2024-6-1</p>
-<p >  46、PC端弹幕系统更新，可以实时刷新弹幕，播放器新增在线观看人数显示。</p>
-<p >  2024-03-26</p>
-<p >  44、PC端播放器升级，支持画中画功能。</p>
-<p >     2024-1-11</p>
-<p >43、APP升级到3.0.0版本，优化播放器，新增P2P技术，新增搜索预览，新增最近播放，优化后端设置</p>
-<p >2024-01-06</p>
-<p >42、PC网页端新增云追番功能，追番记录调用收藏数据，跟随账号数据！-nice！</p>
-         <p >
-    2023-12-15
-</p>
-<p >
-    41、PC网页端播放记录（时光机）进行了升级，最大支持100个番剧记录，播放记录包含更新信息，追剧提醒，播放进度，最大程度方便追番！
-</p>
-     <p >
-    2023-11-28
-</p>
-<p >
-    39、推荐页面6图改8图。
-</p>
-<p >
-    40、番剧更新表PC端改超内容下滚，尽量显示全部。
-</p>
-      <p >
-    2023-9-11
-</p>
-<p >
-    38、网页版页面代码重构，不清楚使用方法建议加闲聊群。
-</p>
- <p >
-    2023-7-24
-</p>
-<p >
-    37、APP 升级至2.8.8版本:1.1.优化后台设置;2.其他小优化
-</p>
-     <p >
-    2023-7-6
-</p>
-<p >
-    36、APP 升级至2.8.7版本:1.修复弹幕库兼容导致的进度条卡顿问题 2.优化进入播放页可能导致的卡顿问题
-</p>
-<p >
-    2023-5-30
-</p>
-<p >
-    36、APP 升级至2.8.6版本，优化播放全屏增加弹幕设置（文字大小、显示区域、弹幕速度、不透明度）
-</p>
-    <p >
-    37、修复APP可能无法播放bug。
-</p>
-<p >
-    2023-5-26
-</p>
-<p >
-    35、APP 与 PC端弹幕同步
-</p>
-<p >
-    2023-5-22
-</p>
-<p >
-    34、APP 苹果和安卓，双端大版本升级优化，体验更佳！！
-</p>
-<p >
-    2023-5-9
-</p>
-<p >
-    32、PC端新增追番统计功能，详情页与播放页的播放器显示追番计数
-</p>
-<p >
-    33、修复ipad播放器不识别，无法全屏问题，切换到wap播放器
-</p>
-<p >
-    2023-4-18
-</p>
-<p >
-    29、PC端动态加载优化
-</p>
-<p >
-    30、PC端播放记录优化，直接跳转到分集
-</p>
-<p >
-    31、番剧时间表分番剧、国创
-</p>
-<p >
-    2023-3-9
-</p>
-<p >
-    28、PC首页新增弹幕数统计；
-</p>
-<p >
-    2023-3-7
-</p>
-<p >
-    25、首页：更新时间表换时间线，更换动态页；
-</p>
-<p >
-    26、分类页：筛选功能点改点拉样式；
-</p>
-<p >
-    27、本次更新重点：播放页：新增：支持宽屏窄屏切换，支持网页全屏，支持屏内选集
-</p>
-<p >
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;特别提醒，查看本次更新，需清空浏览器缓存！
-</p>
-<p >
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;满满的细节 （by 一只喵）
-</p>
-<p >
-    2023-2-5
-</p>
-<p >
-    24、重构PC播放器代码，修复已知BUG，优化加载视频速度，支持全屏下一集播放
-</p>
-<p >
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; （by 一只喵）
-</p>
-<p >
-    2023-1-31
-</p>
-<p >
-    22、PC页面全面升级，播放无刷新，可以丝滑点击下一集，播放页面集数改版
-</p>
-<p >
-    23、PC播放器全面升级，丝滑加载，全屏播放优化，新增弹幕举报。
-</p>
-<p >
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;（by 一只喵）
-</p>
-<p >
-    2023-1-10
-</p>
-<p >
-    21、初版APP和大家见面了 ，S站真真正意义上的第一个APP
-</p>
-<p >
-    2023-1-9
-</p>
-<p >
-    19、PC端瀑布流修改至翻页
-</p>
-<p >
-    20、升级后端程序为app作准备
-</p>
-<p >
-    2022-11-28
-</p>
-<p >
-    18、手机页面改版升级，修复已知BUG
-</p>
-<p >
-    2022-11-03
-</p>
-<p >
-    16、完善PC清空播放记录功能
-</p>
-<p >
-    17、修复WAP页面历史记录显示错位
-</p>
-<p >
-    2022-10-26
-</p>
-<p >
-    14、完成主站版本升级
-</p>
-<p >
-    15、动态页修改为评论聚合
-</p>
-<p >
-    2022-10-17
-</p>
-<p >
-    11、PC端弹幕播放器默认样式修改
-</p>
-<p >
-    12、PC端分类新增排序方式
-</p>
-<p >
-    13、优化首页焦点图显示方式
-</p>
-<p >
-    2022-9-12
-</p>
-<p >
-    9、新增下载功能
-</p>
-<p >
-    10、修复搜索后点击图片再次搜索
-</p>
-<p >
-    2022-9-6
-</p>
-<p >
-    8、手机端H5播放器优化
-</p>
-<p >
-    2022-9-2
-</p>
-<p >
-    7、完善点击收藏时，未登录时直接弹出登录框登录或注册
-</p>
-<p >
-    2022-8-30
-</p>
-<p >
-    4、修复点击不增加问题
-</p>
-<p >
-    5、修复弹幕不匹配问题
-</p>
-<p >
-    6、修改分集颜色区别显示，区分当前集数
-</p>
-<p>
-    2022-8-28
-</p>
-<p>
-    1、修复评论功能
-</p>
-<p>
-    2、新增收藏功能
-</p>
-<p>
-    3、新增会员中心
-</p>
-        </ul>
-           </div>
+            <div class="log-list">
+
+                <div class="log-item">
+                    <div class="log-date">2024-8-20</div>
+                    <ul class="log-content">
+                        <li>50、APP升级到3.2.3版本</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2024-8-19</div>
+                    <ul class="log-content">
+                        <li>48、PC端新增在线统计</li>
+                        <li>49、PC端新增实时聊天弹幕【鼠标右击“发送”可进行切换】</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2024-6-14</div>
+                    <ul class="log-content">
+                        <li>47、APP升级到3.2.2版本，老版本将全部失联</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2024-6-1</div>
+                    <ul class="log-content">
+                        <li>46、PC端弹幕系统更新，可以实时刷新弹幕，播放器新增在线观看人数显示。</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2024-03-26</div>
+                    <ul class="log-content">
+                        <li>44、PC端播放器升级，支持画中画功能。</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2024-1-11</div>
+                    <ul class="log-content">
+                        <li>43、APP升级到3.0.0版本，优化播放器，新增P2P技术，新增搜索预览，新增最近播放，优化后端设置</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2024-01-06</div>
+                    <ul class="log-content">
+                        <li>42、PC网页端新增云追番功能，追番记录调用收藏数据，跟随账号数据！-nice！</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-12-15</div>
+                    <ul class="log-content">
+                        <li>41、PC网页端播放记录（时光机）进行了升级，最大支持100个番剧记录，播放记录包含更新信息，追剧提醒，播放进度，最大程度方便追番！</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-11-28</div>
+                    <ul class="log-content">
+                        <li>39、推荐页面6图改8图。</li>
+                        <li>40、番剧更新表PC端改超内容下滚，尽量显示全部。</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-9-11</div>
+                    <ul class="log-content">
+                        <li>38、网页版页面代码重构，不清楚使用方法建议加闲聊群。</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-7-24</div>
+                    <ul class="log-content">
+                        <li>37、APP 升级至2.8.8版本:1.1.优化后台设置;2.其他小优化</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-7-6</div>
+                    <ul class="log-content">
+                        <li>36、APP 升级至2.8.7版本:1.修复弹幕库兼容导致的进度条卡顿问题 2.优化进入播放页可能导致的卡顿问题</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-5-30</div>
+                    <ul class="log-content">
+                        <li>36、APP 升级至2.8.6版本，优化播放全屏增加弹幕设置（文字大小、显示区域、弹幕速度、不透明度）</li>
+                        <li>37、修复APP可能无法播放bug。</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-5-26</div>
+                    <ul class="log-content">
+                        <li>35、APP 与 PC端弹幕同步</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-5-22</div>
+                    <ul class="log-content">
+                        <li>34、APP 苹果和安卓，双端大版本升级优化，体验更佳！！</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-5-9</div>
+                    <ul class="log-content">
+                        <li>32、PC端新增追番统计功能，详情页与播放页的播放器显示追番计数</li>
+                        <li>33、修复ipad播放器不识别，无法全屏问题，切换到wap播放器</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-4-18</div>
+                    <ul class="log-content">
+                        <li>29、PC端动态加载优化</li>
+                        <li>30、PC端播放记录优化，直接跳转到分集</li>
+                        <li>31、番剧时间表分番剧、国创</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-3-9</div>
+                    <ul class="log-content">
+                        <li>28、PC首页新增弹幕数统计；</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-3-7</div>
+                    <ul class="log-content">
+                        <li>25、首页：更新时间表换时间线，更换动态页；</li>
+                        <li>26、分类页：筛选功能点改点拉样式；</li>
+                        <li>27、本次更新重点：播放页：新增：支持宽屏窄屏切换，支持网页全屏，支持屏内选集</li>
+                    </ul>
+                    <div class="log-note">特别提醒，查看本次更新，需清空浏览器缓存！<br>满满的细节 （by 一只喵）</div>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-2-5</div>
+                    <ul class="log-content">
+                        <li>24、重构PC播放器代码，修复已知BUG，优化加载视频速度，支持全屏下一集播放</li>
+                    </ul>
+                    <div class="log-note">（by 一只喵）</div>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-1-31</div>
+                    <ul class="log-content">
+                        <li>22、PC页面全面升级，播放无刷新，可以丝滑点击下一集，播放页面集数改版</li>
+                        <li>23、PC播放器全面升级，丝滑加载，全屏播放优化，新增弹幕举报。</li>
+                    </ul>
+                    <div class="log-note">（by 一只喵）</div>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-1-10</div>
+                    <ul class="log-content">
+                        <li>21、初版APP和大家见面了 ，S站真真正意义上的第一个APP</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2023-1-9</div>
+                    <ul class="log-content">
+                        <li>19、PC端瀑布流修改至翻页</li>
+                        <li>20、升级后端程序为app作准备</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2022-11-28</div>
+                    <ul class="log-content">
+                        <li>18、手机页面改版升级，修复已知BUG</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2022-11-03</div>
+                    <ul class="log-content">
+                        <li>16、完善PC清空播放记录功能</li>
+                        <li>17、修复WAP页面历史记录显示错位</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2022-10-26</div>
+                    <ul class="log-content">
+                        <li>14、完成主站版本升级</li>
+                        <li>15、动态页修改为评论聚合</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2022-10-17</div>
+                    <ul class="log-content">
+                        <li>11、PC端弹幕播放器默认样式修改</li>
+                        <li>12、PC端分类新增排序方式</li>
+                        <li>13、优化首页焦点图显示方式</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2022-9-12</div>
+                    <ul class="log-content">
+                        <li>9、新增下载功能</li>
+                        <li>10、修复搜索后点击图片再次搜索</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2022-9-6</div>
+                    <ul class="log-content">
+                        <li>8、手机端H5播放器优化</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2022-9-2</div>
+                    <ul class="log-content">
+                        <li>7、完善点击收藏时，未登录时直接弹出登录框登录或注册</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2022-8-30</div>
+                    <ul class="log-content">
+                        <li>4、修复点击不增加问题</li>
+                        <li>5、修复弹幕不匹配问题</li>
+                        <li>6、修改分集颜色区别显示，区分当前集数</li>
+                    </ul>
+                </div>
+
+                <div class="log-item">
+                    <div class="log-date">2022-8-28</div>
+                    <ul class="log-content">
+                        <li>1、修复评论功能</li>
+                        <li>2、新增收藏功能</li>
+                        <li>3、新增会员中心</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
     </div>
-      </div>
+
+    <div class="copyright" style="text-align:center;font-size:12px;color:#999;padding:10px 0;">© 2024 嘶哩嘶哩 All rights reserved.</div>
+</div>
 </body>
 </html>
